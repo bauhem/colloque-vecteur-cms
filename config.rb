@@ -6,11 +6,6 @@ require "uglifier"
 # https://middlemanapp.com/advanced/configuration/#configuring-extensions
 
 # Use '#id' and '.classname' as div shortcuts in slim
-# http://slim-lang.com/
-Slim::Engine.set_options shortcut: {
-  '#' => {tag: 'div', attr: 'id'},
-  '.' => {tag: 'div', attr: 'class'}
-}
 
 activate :autoprefixer do |prefix|
   prefix.browsers = "last 2 versions"
@@ -26,12 +21,8 @@ page '/*.json', layout: false
 page '/*.txt', layout: false
 page "/partials/*", layout: false
 page "/admin/*", layout: false
+page "/index.html", layout: false
 
-activate :blog do |blog|
-  blog.permalink = "news/{year}/{title}.html"
-  blog.sources = "posts/{title}.html"
-  blog.layout = "news-detail"
-end
 
 # With alternative layout
 # page '/path/to/file.html', layout: 'other_layout'
@@ -39,14 +30,7 @@ end
 # Proxy pages
 # https://middlemanapp.com/advanced/dynamic-pages/
 
-# proxy product.yml files to product.html 
-data.products.each do |product|
-  # product is an array: [filename, {data}]
-  proxy "/product/#{product[1][:title].parameterize}/index.html", "product.html", 
-  locals: {product: product[1]}, 
-  layout: 'product-detail',
-  ignore: true
-end
+# proxy product.yml files to product.html
 
 # Helpers
 # Methods defined in the helpers block are available in templates
@@ -60,7 +44,7 @@ helpers do
   def background_image(image)
     "background-image: url('" << image_path(image) << "')"
   end
-  
+
   def nav_link(link_text, url, options = {})
     options[:class] ||= ""
     options[:class] << " active" if url == current_page.url
