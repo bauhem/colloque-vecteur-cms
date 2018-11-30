@@ -1,5 +1,4 @@
 #Bootstrap is used to style bits of the demo. Remove it from the config, gemfile and stylesheets to stop using bootstrap
-require 'bootstrap-sass'
 require "uglifier"
 
 # Activate and configure extensions
@@ -11,7 +10,12 @@ activate :autoprefixer do |prefix|
   prefix.browsers = "last 2 versions"
 end
 
-activate :livereload
+set(:port, 3636)
+
+
+configure :development do
+  activate :livereload
+end
 # Layouts
 # https://middlemanapp.com/basics/layouts/
 
@@ -22,6 +26,9 @@ page '/*.txt', layout: false
 page "/partials/*", layout: false
 page "/admin/*", layout: false
 page "/index.html", layout: false
+page "/call-for-presentation-has-begun-blog.html", layout: false
+page "/home.html", layout: false
+page "/l-appel-a-communication-est-commence.html", layout: false
 
 
 # With alternative layout
@@ -41,19 +48,9 @@ activate :directory_indexes
 
 helpers do
   #helper to set background images with asset hashes in a style attribute
-  def background_image(image)
-    "background-image: url('" << image_path(image) << "')"
-  end
 
-  def nav_link(link_text, url, options = {})
-    options[:class] ||= ""
-    options[:class] << " active" if url == current_page.url
-    link_to(link_text, url, options)
-  end
 
-  def markdown(content)
-     Tilt['markdown'].new { content }.render
-  end
+
 end
 
 # Build-specific configuration
