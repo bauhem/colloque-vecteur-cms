@@ -18,15 +18,14 @@ end
 set(:port, 3636)
 
 
-set :url_root, 'https://www..com'
-set :js_dir, 'js'
-set :css_dir, 'css'
+set :url_root, 'https://www.colloquevecteur.com'
+
 set :index_file, "index.html"
 set :markdown_engine, :redcarpet
 set :relative_links, true
 set :fonts_dir, 'fonts'
 
-activate :dato, live_reload: true, token: 'f7dd3f9b5f4b196d3cc6b0d775cafe'
+activate :dato, live_reload: true, token: 'e68a47458da0fbe8ddc09137ff2d87'
 activate :directory_indexes
 activate :search_engine_sitemap, exclude_attr: 'hidden'
 activate :inliner
@@ -56,7 +55,7 @@ page '/*.json', layout: false
 page '/*.txt', layout: false
 page "/templates/*", :layout => "layout"
 page "/index.html", :layout => "layout"
-page "/home.html", :layout => "layout"
+page "/home.html", :layout => "layout-en"
 
 
 # With alternative layout

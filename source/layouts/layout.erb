@@ -1,6 +1,6 @@
 <!doctype html>
 
-<html data-wf-page="5be1afb0403be2d6cbbd0ea9" data-wf-site="5be1afb0403be2f6f2bd0ea8" lang="fr">
+<html data-wf-page="5be1afb0403be2d6cbbd0ea9" data-wf-site="5be1afb0403be2f6f2bd0ea8">
   <head>
     <!-- Use the title from a page's frontmatter if it has one -->
 
@@ -10,8 +10,8 @@
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <meta content="Webflow" name="generator">
     <%= stylesheet_link_tag "normalize" %>
-    <%= stylesheet_link_tag "webflow" %>
-    <%= stylesheet_link_tag "colloque-vecteur.webflow" %>
+    <%= stylesheet_link_tag "components" %>
+    <%= stylesheet_link_tag "colloque-vecteur" %>
 
 
     <!-- [if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" type="text/javascript"></script><![endif] -->
@@ -28,8 +28,9 @@
 
       <%= partial "/partials/footer-fr" %>
 
+      <script src="https://code.jquery.com/jquery-3.3.1.min.js" type="text/javascript" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
-    <%= javascript_include_tag "webflow" %>
+    <%= javascript_include_tag "colloque-vecteur" %>
 
   </body>
 </html>
