@@ -1,5 +1,8 @@
 backend:
   name: git-gateway
+  branch: master # Branch to update (optional; defaults to master)
+  publish_mode: editorial_workflow
+  media_folder: "source/images/uploads" # Media files will be stored in the repo under images/uploads
 
 media_folder: source/images/uploads
 public_folder: /images/uploads
@@ -14,6 +17,10 @@ collections:
     extension: .html.md
     format: frontmatter
     create: true
+    widget: "relation"
+    collection: "page"
+    searchFields: ["name"]
+    valueField: "name"
     slug: '{{title}}'
     fields:
       - {label: Title, name: title, widget: string, required: true}

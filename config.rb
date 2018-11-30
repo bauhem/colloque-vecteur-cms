@@ -46,6 +46,10 @@ page "/l-appel-a-communication-est-commence.html", layout: false
 # pretty urls
 activate :directory_indexes
 
+ignore '/templates/*'
+ignore '/admin/netlify-cms/'
+
+
 helpers do
   #helper to set background images with asset hashes in a style attribute
 
