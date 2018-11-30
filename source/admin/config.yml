@@ -28,6 +28,7 @@ collections:
       - file: "data/pages/home.yml"
         label: Homepage
         name: home
+        create: true
         fields:
           - label: Hero
             name: hero
