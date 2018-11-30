@@ -1,10 +1,15 @@
 #Bootstrap is used to style bits of the demo. Remove it from the config, gemfile and stylesheets to stop using bootstrap
-require "uglifier"
+require 'html_truncator'
+require 'redcarpet'
+require "sanitize"
+require 'middleman-inliner'
+require 'nokogiri'
 
 # Activate and configure extensions
 # https://middlemanapp.com/advanced/configuration/#configuring-extensions
 
 # Use '#id' and '.classname' as div shortcuts in slim
+activate :protect_emails
 
 activate :autoprefixer do |prefix|
   prefix.browsers = "last 2 versions"
@@ -13,8 +18,34 @@ end
 set(:port, 3636)
 
 
+set :url_root, 'https://www..com'
+set :js_dir, 'js'
+set :css_dir, 'css'
+set :index_file, "index.html"
+set :markdown_engine, :redcarpet
+set :relative_links, true
+set :fonts_dir, 'fonts'
+
+activate :dato, live_reload: true, token: 'f7dd3f9b5f4b196d3cc6b0d775cafe'
+activate :directory_indexes
+activate :search_engine_sitemap, exclude_attr: 'hidden'
+activate :inliner
+activate :sprockets
+activate :i18n, langs: [:fr, :en], :mount_at_root => 'fr'
+
 configure :development do
   activate :livereload
+end
+
+
+activate :robots,
+  :rules => [
+    {:user_agent => '*', :allow => %w(/)}
+  ],
+  :sitemap => "https://www..com/sitemap.xml"
+
+activate :google_analytics do |ga|
+    ga.tracking_id = 'UA-129577045-1' # Replace with your property ID.
 end
 # Layouts
 # https://middlemanapp.com/basics/layouts/
@@ -23,12 +54,9 @@ end
 page '/*.xml', layout: false
 page '/*.json', layout: false
 page '/*.txt', layout: false
-page "/partials/*", layout: false
-page "/admin/*", layout: false
-page "/index.html", layout: false
-page "/call-for-presentation-has-begun-blog.html", layout: false
-page "/home.html", layout: false
-page "/l-appel-a-communication-est-commence.html", layout: false
+page "/templates/*", :layout => "layout"
+page "/index.html", :layout => "layout"
+page "/home.html", :layout => "layout"
 
 
 # With alternative layout
@@ -44,33 +72,32 @@ page "/l-appel-a-communication-est-commence.html", layout: false
 # https://middlemanapp.com/basics/helper-methods/
 
 # pretty urls
-activate :directory_indexes
 
 ignore '/templates/*'
-ignore '/admin/netlify-cms/'
-
 
 helpers do
-  #helper to set background images with asset hashes in a style attribute
 
 
+  def strip_tags(html)
+    Sanitize.clean(html.strip).strip
+  end
+
+  def markdown(text)
+    renderer = Redcarpet::Render::HTML.new
+    Redcarpet::Markdown.new(renderer).render(text)
+  end
 
 end
-
 # Build-specific configuration
 # https://middlemanapp.com/advanced/configuration/#environment-specific-settings
 
 configure :build do
-  # Minify css on build
-  activate :minify_css
-
-  # Minify Javascript on build
-  activate :minify_javascript, :ignore => "**/admin/**", compressor: ::Uglifier.new(mangle: true, compress: { drop_console: true }, output: {comments: :none})
-
-  # Use Gzip
+  activate :minify_css, inline: true
+  activate :minify_javascript
+  activate :minify_html
+  activate :relative_assets
+  activate :asset_hash, :ignore => [%r{#fonts/.*}, %r{#stylesheets/fonts/.*}]
   activate :gzip
-
-  #Use asset hashes to use for caching
-  #activate :asset_hash
-
+  activate :automatic_image_sizes
+  activate :automatic_alt_tags
 end
