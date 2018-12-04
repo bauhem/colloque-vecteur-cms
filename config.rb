@@ -25,12 +25,12 @@ set :markdown_engine, :redcarpet
 set :relative_links, true
 set :fonts_dir, 'fonts'
 
-activate :dato, live_reload: true, token: 'e68a47458da0fbe8ddc09137ff2d87'
+activate :dato, live_reload: true, token: '045f8415a95f4ed3d3be0898d8509f'
 activate :directory_indexes
 activate :search_engine_sitemap, exclude_attr: 'hidden'
 activate :inliner
 activate :sprockets
-activate :i18n, langs: [:fr, :en], :mount_at_root => 'fr'
+activate :i18n, langs: [:fr, :en]
 
 configure :development do
   activate :livereload
@@ -53,9 +53,33 @@ end
 page '/*.xml', layout: false
 page '/*.json', layout: false
 page '/*.txt', layout: false
-page "/templates/*", :layout => "layout"
+page "/templates/blog_detail.html", :layout => "layout"
+page "/templates/blog_detail-en.html", :layout => "layout-anglais"
 page "/index.html", :layout => "layout"
-page "/home.html", :layout => "layout-en"
+page "/home.html", :layout => "layout-anglais"
+
+
+
+    dato.tap do |dato|
+      # iterate over the "Blog post" records...
+        dato.langues.each do |langue|
+          if langue.title == "en"
+          dato.publications.each do |publication|
+          # ...and create a page for each service starting from a template!
+          if publication.langue.title == langue.title
+            if publication.actif
+                proxy(
+                  "/en/#{publication.section.anglais}/#{publication.slug}/index.html",
+                  "/templates/blog_detail-en.html",
+                  locals: { publication: publication },
+                )
+
+                end
+              end
+            end
+            end
+          end
+      end
 
 
 # With alternative layout

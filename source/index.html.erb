@@ -1,5 +1,3 @@
-
-  
   <div id="hero" data-w-id="f117c11b-e838-a0eb-e4b0-88be7b4f2758" class="section hero">
     <div class="div-baseline"><img src="images/logo.png" data-w-id="458db7a9-b972-4d51-f373-86d0763ab1bc" style="opacity:0;-webkit-transform:translate3d(0, 0, 0) scale3d(0.8, 0.8, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(0.8, 0.8, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(0.8, 0.8, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(0.8, 0.8, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" alt="" class="hero-logo">
       <div data-w-id="d55a193c-60db-eda4-2514-bf99862d2c62" style="opacity:0" class="text-date">15 au 17 avril 2019 - Hôtel Rimouski</div>
@@ -34,26 +32,42 @@
       </div>
       <div class="div-background"><img src="images/white.png" srcset="images/white-p-500.png 500w, images/white-p-800.png 800w, images/white-p-1080.png 1080w, images/white-p-1600.png 1600w, images/white-p-2000.png 2000w, images/white-p-2600.png 2600w, images/white-p-3200.png 3200w, images/white.png 3812w" sizes="100vw" alt="" class="background-image"></div>
     </div>
+
+
+    <!-- NOUVELLES -->
     <div id="nouvelles" class="section">
       <div id="w-node-dadac26dad4c-cbbd0ea9" class="div-background"><img src="images/white.png" srcset="images/white-p-500.png 500w, images/white-p-800.png 800w, images/white-p-1080.png 1080w, images/white-p-1600.png 1600w, images/white-p-2000.png 2000w, images/white-p-2600.png 2600w, images/white-p-3200.png 3200w, images/white.png 3812w" sizes="100vw" alt="" class="background-image sujets"></div>
       <div class="div-sujets-content">
         <div data-w-id="3aaf7c76-8d7a-d2d6-e3b9-06656591396b" style="opacity:0">
           <div class="title yellow">Nouvelles</div>
         </div>
-        <div data-w-id="78456833-fe13-0b7b-1c07-d4426144ab61" style="opacity:0" class="div-nouvelles-container">
 
-          <a href="l-appel-a-communication-est-commence.html" class="div-nouvelle-block w-inline-block">
-            <div class="nouvelle-heading">L&#x27;appel à communication est lancé. </div>
-            <div class="nouvelle-date">19 novembre 2018</div>
-            <div>Vous pouvez désormais faire vos propositions de conférences.</div>
-          </a>
-
+        <div class="div-nouvelles-container">
+          <% dato.publications.each do |publication| %>
+          <% if publication.langue.title == "fr" %>
+              <a href="/fr/<%= publication.section.slug %>/<%= publication.slug %>" class="div-nouvelle-block w-inline-block">
+                <div class="nouvelle-heading"><%= publication.titre %></div>
+                <% if publication.ajouter_une_date == true %><div class="nouvelle-date"><%= publication.date %></div><% end %>
+                <div>
+                <% publication.contenu.each do |contenu| %>
+                <% if contenu.item_type.api_key == "introduction" %>
+                <%= contenu.description %>
+                <% end %>
+                <% end %></div>
+              </a>
+            <% end %>
+          <% end %>
         </div>
+
+
+
         <a href="#" class="button margin w-hidden-main w-hidden-medium w-hidden-small w-hidden-tiny w-inline-block" data-ix="plus-darticles">
           <div>Voir plus d&#x27;articles</div>
         </a>
       </div>
     </div>
+
+
     <div id="appel" class="section white">
       <div class="div-about-content reverse">
         <div data-w-id="d24c09f2-a185-16e4-d631-9dfaa4c00946" style="opacity:0" class="div-50 text">
