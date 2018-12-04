@@ -77,6 +77,20 @@ page "/home.html", :layout => "layout-anglais"
                 end
               end
             end
+          else
+            dato.publications.each do |publication|
+            # ...and create a page for each service starting from a template!
+            if publication.langue.title == langue.title
+              if publication.actif
+                  proxy(
+                    "/#{publication.section.slug}/#{publication.slug}/index.html",
+                    "/templates/blog_detail.html",
+                    locals: { publication: publication },
+                  )
+
+                  end
+                end
+              end
             end
           end
       end
