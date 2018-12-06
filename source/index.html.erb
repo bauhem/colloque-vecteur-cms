@@ -45,7 +45,7 @@
         <div class="div-nouvelles-container">
           <% dato.publications.each do |publication| %>
           <% if publication.langue.title == "fr" %>
-              <a href="/fr/<%= publication.section.slug %>/<%= publication.slug %>" class="div-nouvelle-block w-inline-block">
+              <a href="/<%= publication.section.slug %>/<%= publication.slug %>" class="div-nouvelle-block w-inline-block">
                 <div class="nouvelle-heading"><%= publication.titre %></div>
                 <% if publication.ajouter_une_date == true %><div class="nouvelle-date"><%= publication.date %></div><% end %>
                 <div>
