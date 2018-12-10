@@ -73,7 +73,6 @@ page "/home.html", :layout => "layout-anglais"
                   "/templates/blog_detail-en.html",
                   locals: { publication: publication },
                 )
-
                 end
               end
             end

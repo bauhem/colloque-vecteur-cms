@@ -8,7 +8,7 @@
 
 
     <div class="div-separator-breadcrumb"></div>
-    <div><a href="l-appel-a-communication-est-commence.html" class="breadcrumb-link w--current"><%= publication.titre %></a></div>
+    <div><a href="<%= publication.slug %>" class="breadcrumb-link w--current"><%= publication.titre %></a></div>
   </div>
 
   <!-- PUBLICATION -->
@@ -24,6 +24,11 @@
       <% publication.contenu.each do |contenu| %>
       <% if contenu.item_type.api_key == "bouton" %>
       <a href="<%= contenu.lien_externe %>" class="button yellow w-inline-block">
+        <div><%= contenu.titre %></div>
+      </a>
+      <% end %>
+      <% if contenu.item_type.api_key == "fichier_pdf" %>
+      <a href="<%= contenu.fichier.fichier_pdf.url %>" target="_blank" class="button yellow w-inline-block">
         <div><%= contenu.titre %></div>
       </a>
       <% end %>

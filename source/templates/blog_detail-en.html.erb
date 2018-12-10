@@ -26,6 +26,11 @@
         <div><%= contenu.titre %></div>
       </a>
       <% end %>
+      <% if contenu.item_type.api_key == "fichier_pdf" %>
+      <a href="<%= contenu.fichier.fichier_pdf.url %>" target="_blank" class="button yellow w-inline-block">
+        <div><%= contenu.titre %></div>
+      </a>
+      <% end %>
       <% end %>
 
     </div>
