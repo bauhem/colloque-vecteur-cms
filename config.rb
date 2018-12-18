@@ -4,6 +4,8 @@ require 'redcarpet'
 require "sanitize"
 require 'middleman-inliner'
 require 'nokogiri'
+redirect 'index.html', to: '/fr/index.html'
+
 
 # Activate and configure extensions
 # https://middlemanapp.com/advanced/configuration/#configuring-extensions
@@ -24,13 +26,17 @@ set :index_file, "index.html"
 set :markdown_engine, :redcarpet
 set :relative_links, true
 set :fonts_dir, 'fonts'
+set :js_dir, 'javascripts'
+set :index_file, "index.html"
+
 
 activate :dato, live_reload: true, token: '045f8415a95f4ed3d3be0898d8509f'
 activate :directory_indexes
 activate :search_engine_sitemap, exclude_attr: 'hidden'
 activate :inliner
 activate :sprockets
-activate :i18n, langs: [:fr, :en]
+activate :i18n, langs: [:fr, :en], :mount_at_root => :fr
+
 
 configure :development do
   activate :livereload
@@ -53,46 +59,91 @@ end
 page '/*.xml', layout: false
 page '/*.json', layout: false
 page '/*.txt', layout: false
-page "/templates/blog_detail.html", :layout => "layout"
-page "/templates/blog_detail-en.html", :layout => "layout-anglais"
-page "/index.html", :layout => "layout"
-page "/home.html", :layout => "layout-anglais"
+page "/templates/*", :layout => "layout"
+page '/sitemap.xml', :layout => false
 
 
+dato.tap do |dato|
+  dato.available_locales.each do |locale|
+    I18n.with_locale(locale) do
+    # iterate over the "Blog post" records...
 
-    dato.tap do |dato|
-      # iterate over the "Blog post" records...
-        dato.langues.each do |langue|
-          if langue.title == "en"
-          dato.publications.each do |publication|
-          # ...and create a page for each service starting from a template!
-          if publication.langue.title == langue.title
-            if publication.actif
-                proxy(
-                  "/en/#{publication.section.anglais}/#{publication.slug}/index.html",
-                  "/templates/blog_detail-en.html",
-                  locals: { publication: publication },
-                )
-                end
-              end
-            end
-          else
-            dato.publications.each do |publication|
-            # ...and create a page for each service starting from a template!
-            if publication.langue.title == langue.title
-              if publication.actif
-                  proxy(
-                    "/#{publication.section.slug}/#{publication.slug}/index.html",
-                    "/templates/blog_detail.html",
-                    locals: { publication: publication },
-                  )
-
-                  end
-                end
-              end
-            end
-          end
+    dato.publications.each do |publication|
+    if publication.actif
+    if publication.section.page_unique
+      proxy(
+        "/#{locale}/#{publication.section.slug}/index.html",
+        "/templates/blog_detail.html",
+        locals: { publication: publication },
+        locale: locale
+      )
+    else
+    # ...and create a page for each service starting from a template!
+        proxy(
+          "/#{locale}/#{publication.section.slug}/#{publication.slug}/index.html",
+          "/templates/blog_detail.html",
+          locals: { publication: publication },
+          locale: locale
+        )
       end
+      end
+     end
+     end
+     end
+end
+
+  dato.tap do |dato|
+    dato.available_locales.each do |locale|
+      I18n.with_locale(locale) do
+      # iterate over the "Blog post" records...
+
+      dato.publications.each do |publication|
+      if publication.actif
+
+
+      # ...and create a page for each service starting from a template!
+          proxy(
+            "/#{locale}/#{publication.section.slug}/index.html",
+            "/templates/blog_detail.html",
+            locals: { publication: publication },
+            locale: locale
+          )
+        end
+       end
+       end
+       end
+       end
+
+
+dato.tap do |dato|
+  dato.available_locales.each do |locale|
+    I18n.with_locale(locale) do
+    # iterate over the "Blog post" records...
+    dato.sections.each do |section|
+    if section.actif
+    if section.accueil
+    dato.publications.each do |publication|
+    if publication.actif
+    publication.section == section
+
+    # ...and create a page for each service starting from a template!
+        proxy(
+          "/#{locale}/index.html",
+          "/templates/index.html",
+          locals: { section: section, publication: publication },
+          locale: locale
+        )
+      end
+     end
+     end
+     end
+     end
+     end
+    end
+  end
+
+
+
 
 
 # With alternative layout

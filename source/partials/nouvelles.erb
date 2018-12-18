@@ -1,0 +1,48 @@
+<% dato.sections.each do |section1| %>
+<% if section1.titre == "Nouvelles" || section1.titre == "News" %>
+<!-- NOUVELLES -->
+<div id="<%= section1.titre.downcase %>" class="section">
+  <div id="w-node-dadac26dad4c-cbbd0ea9" class="div-background"><img src="/images/white.png" srcset="/images/white-p-500.png 500w, /images/white-p-800.png 800w, /images/white-p-1080.png 1080w, /images/white-p-1600.png 1600w, /images/white-p-2000.png 2000w, /images/white-p-2600.png 2600w, /images/white-p-3200.png 3200w, /images/white.png 3812w" sizes="100vw" alt="" class="background-image sujets"></div>
+  <div class="div-sujets-content">
+    <div >
+      <div class="title yellow"><%= section1.titre %></div>
+    </div>
+
+    <div class="div-nouvelles-container">
+      <% dato.publications.each do |publication| %>
+      <% if publication.titre != "" %>
+      <% if publication.actif %>
+      <% if publication.section %>
+      <% if publication.section.page_unique %>
+      <% else %>
+          <a href="/<%= locale %>/<%= publication.section.slug %>/<%= publication.slug %>" class="div-nouvelle-block w-inline-block">
+            <div class="nouvelle-heading"><%= publication.titre %></div>
+            <% if publication.ajouter_une_date == true %><div class="nouvelle-date"><%= publication.date %></div><% end %>
+            <div>
+            <% publication.contenu.each do |contenu| %>
+            <% if contenu.item_type.api_key == "intro" %>
+            <%= contenu.description %>
+            <% end %>
+            <% end %></div>
+          </a>
+      <% end %>
+      <% end %>
+      <% end %>
+      <% end %>
+      <% end %>
+
+
+
+
+
+    </div>
+
+
+
+    <a href="#" class="button margin w-hidden-main w-hidden-medium w-hidden-small w-hidden-tiny w-inline-block" data-ix="plus-darticles">
+      <div>Voir plus d&#x27;articles</div>
+    </a>
+  </div>
+</div>
+<% end %>
+<% end %>

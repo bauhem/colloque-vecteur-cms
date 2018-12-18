@@ -1,0 +1,24 @@
+<% dato.sections.each do |section1| %>
+<% if section1.titre == "Inscription" %>
+<div id="<%= section1.titre.downcase %>" class="section white">
+  <div class="div-about-content">
+    <div data-w-id="aeb8cb20-7230-a813-60f6-4a641142b177" style="opacity:0" class="div-50 text">
+      <%= section1.description %>
+
+      <% if section1.lien_externe %>
+      <a href="<%= section1.lien %>" target="_blank" class="button white w-inline-block">
+        <div><%= section1.titre_lien %></div>
+      </a>
+      <% end %>
+
+    </div>
+    <div data-w-id="9b387315-5ac2-9cea-258f-efeee6d2080b" style="opacity:0" class="div-50 pictures">
+      <div data-w-id="9b387315-5ac2-9cea-258f-efeee6d2080c" style="opacity:0" class="div-picture first" data-ix="div-picture-moving-loop"><img src="/images/IMG_20181021_122015766_HDR.jpg" srcset="/images/IMG_20181021_122015766_HDR-p-500.jpeg 500w, /images/IMG_20181021_122015766_HDR-p-800.jpeg 800w, /images/IMG_20181021_122015766_HDR.jpg 1000w" sizes="(max-width: 479px) 55vw, (max-width: 767px) 57vw, (max-width: 991px) 54vw, (max-width: 3703px) 27vw, 1000px" alt=""></div>
+      <div data-w-id="9b387315-5ac2-9cea-258f-efeee6d2080e" style="opacity:0" class="div-picture third" data-ix="div-picture-moving-loop"><img src="/images/IMG_20170510_093750.jpg" srcset="/images/IMG_20170510_093750-p-500.jpeg 500w, /images/IMG_20170510_093750-p-800.jpeg 800w, /images/IMG_20170510_093750.jpg 1000w" sizes="(max-width: 479px) 41vw, (max-width: 767px) 43vw, (max-width: 991px) 41vw, (max-width: 5000px) 20vw, 1000px" alt=""></div>
+      <div data-w-id="9b387315-5ac2-9cea-258f-efeee6d20810" style="opacity:0" class="div-picture second" data-ix="div-picture-moving-loop"><img src="/images/FP-CIDCO_2017-57.jpg" srcset="/images/FP-CIDCO_2017-57-p-500.jpeg 500w, /images/FP-CIDCO_2017-57-p-800.jpeg 800w, /images/FP-CIDCO_2017-57.jpg 863w" sizes="(max-width: 479px) 64vw, (max-width: 767px) 66vw, (max-width: 991px) 63vw, 32vw" alt=""></div>
+    </div>
+  </div>
+  <div class="div-background"><img src="//images/grey.png" srcset="/images/grey-p-500.png 500w, /images/grey-p-800.png 800w, /images/grey-p-1080.png 1080w, /images/grey-p-1600.png 1600w, /images/grey-p-2000.png 2000w, /images/grey-p-2600.png 2600w, /images/grey.png 3812w" sizes="100vw" alt="" class="background-image grey"></div>
+</div>
+<% end %>
+<% end %>

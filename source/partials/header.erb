@@ -1,24 +1,27 @@
 <div data-collapse="medium" data-animation="default" data-duration="400" class="navbar-scroll w-nav">
   <a href="/" class="brand w-nav-brand w--current"><img src="/images/vecteur_logo_temporaire.png" alt=""></a>
   <nav role="navigation" class="nav-menu float-right w-nav-menu">
+
     <% dato.sections.each do |section| %>
-    <% if section.page_unique %>
-    <% dato.publications.each do |publication| %>
-    <% if publication.langue.title == "fr" %>
-    <% if publication.section.actif %>
-    <% if publication.section.page_unique %>
-    <a href="/<%= publication.section.slug %>/<%= publication.slug %>" class="nav-link w-nav-link"><%= publication.section.titre %></a>
-    <% end %>
-    <% end %>
-    <% end %>
-    <% end %>
+    <% if section.actif %>
+    <% if section.menu_principal %>
     <% else %>
-    <a href="/#<%= section.slug %>" class="nav-link w-nav-link"><%= section.titre %></a>
+      <% if section.page_unique %>
+      <a href="/<%= locale %>/<%= section.slug %>" class="nav-link w-nav-link"><%= section.titre %></a>
+      <% else %>
+      <a href="/<%= locale %>/#<%= section.slug %>" class="nav-link w-nav-link"><%= section.titre %></a>
+      <% end %>
     <% end %>
     <% end %>
 
+    <% end %>
+
     <div class="div-separator"></div>
-    <a href="/home" class="nav-link w-nav-link">EN</a>
+      <% if lang.to_s == 'fr' %>
+      <a href="/en" class="nav-link w-nav-link">EN</a>
+      <% else %>
+    <a href="/fr" class="nav-link w-nav-link">FR</a>
+      <% end %>
   </nav>
   <div class="menu-button w-nav-button" data-ix="menu-button">
     <div class="div-bar">
@@ -36,22 +39,26 @@ class="navbar w-nav"
 data-ix="menu-scroll">
   <nav role="navigation" class="nav-menu w-nav-menu">
     <% dato.sections.each do |section| %>
-    <% if section.page_unique %>
-    <% dato.publications.each do |publication| %>
-    <% if publication.langue.title == "fr" %>
-    <% if publication.section.actif %>
-    <% if publication.section.page_unique %>
-    <a href="/<%= publication.section.slug %>/<%= publication.slug %>" class="nav-link w-nav-link"><%= publication.section.titre %></a>
-    <% end %>
-    <% end %>
-    <% end %>
-    <% end %>
+    <% if section.actif %>
+    <% if section.menu_principal %>
     <% else %>
-    <a href="/#<%= section.slug %>" class="nav-link w-nav-link"><%= section.titre %></a>
+      <% if section.page_unique %>
+      <a href="/<%= locale %>/<%= section.slug %>" class="nav-link w-nav-link"><%= section.titre %></a>
+      <% else %>
+      <a href="/<%= locale %>/#<%= section.slug %>" class="nav-link w-nav-link"><%= section.titre %></a>
+      <% end %>
     <% end %>
     <% end %>
+
+    <% end %>
+
+
     <div class="div-separator"></div>
-    <a href="/home" class="nav-link w-nav-link">EN</a>
+    <% if lang.to_s == 'fr' %>
+    <a href="/en" class="nav-link w-nav-link">EN</a>
+    <% else %>
+  <a href="/fr" class="nav-link w-nav-link">FR</a>
+    <% end %>
   </nav>
   <div class="menu-button w-nav-button" data-ix="menu-button">
     <div class="div-bar">

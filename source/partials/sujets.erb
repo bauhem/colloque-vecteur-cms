@@ -1,0 +1,30 @@
+<% dato.sections.each do |section1| %>
+<% if section1.slug == "programmation" || section1.slug == "program" %>
+<div id="<%= section1.slug %>" class="section">
+  <div id="w-node-d231cfd067bb-cbbd0ea9" class="div-background">
+    <img src="/images/white.png" srcset="/images/white-p-500.png 500w, /images/white-p-800.png 800w, /images/white-p-1080.png 1080w, /images/white-p-1600.png 1600w, /images/white-p-2000.png 2000w, /images/white-p-2600.png 2600w, /images/white-p-3200.png 3200w, /images/white.png 3812w" sizes="100vw" alt="" class="background-image sujets"></div>
+  <div class="div-sujets-content">
+    <div>
+      <div class="subtitle"><%= section1.sous_titre %></div>
+      <div class="title yellow"><%= section1.slogan %></div>
+      <div><%= section1.description %></div>
+    </div>
+    <div class="div-liste-container">
+        <%= section1.description_2 %>
+
+
+    </div>
+    <div>
+      <div><div><%= section1.description_3 %></div></div>
+
+      <% if section1.lien_externe %>
+      <a href="<%= section1.lien %>" target="_blank" class="button margin w-inline-block">
+        <div><%= section1.titre_lien %></div>
+      </a>
+      <% end %>
+
+    </div>
+  </div>
+</div>
+<% end %>
+<% end %>

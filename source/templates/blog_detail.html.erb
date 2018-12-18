@@ -4,11 +4,16 @@
   <!-- BREADCRUMB -->
   <div class="div-breadcrumb">
 
-    <div><a href="/" class="breadcrumb-link">Accueil</a></div>
+    <div><a href="/<%= locale %>/" class="breadcrumb-link">Accueil</a></div>
 
 
     <div class="div-separator-breadcrumb"></div>
-    <div><a href="<%= publication.slug %>" class="breadcrumb-link w--current"><%= publication.titre %></a></div>
+    <div>
+      <% if publication.section.page_unique %>
+      <a href="/<%= locale %>/<%= publication.section.slug %>" class="breadcrumb-link w--current"><%= publication.section.titre %></a></div>
+      <% else %>
+      <a href="/<%= locale %>/#<%= publication.section.slug %>" class="breadcrumb-link w--current"><%= publication.section.titre %></a></div>
+      <% end %>
   </div>
 
   <!-- PUBLICATION -->
@@ -16,6 +21,7 @@
     <h1 class="nouvelle-heading"><%= publication.titre %></h1>
     <div class="nouvelle-date"><%= publication.date %></div>
     <div>
+
       <% publication.contenu.each do |contenu| %>
       <% if contenu.item_type.api_key != "bouton" %>
       <%= contenu.description %>
@@ -23,16 +29,20 @@
       <% end %>
       <% publication.contenu.each do |contenu| %>
       <% if contenu.item_type.api_key == "bouton" %>
-      <a href="<%= contenu.lien_externe %>" class="button yellow w-inline-block">
+      <% if contenu.lien_externe != "" %>
+      <a href="<%= contenu.lien_externe %>" target="_blank" class="button yellow w-inline-block">
         <div><%= contenu.titre %></div>
       </a>
       <% end %>
-      <% if contenu.item_type.api_key == "fichier_pdf" %>
-      <a href="<%= contenu.fichier.fichier_pdf.url %>" target="_blank" class="button yellow w-inline-block">
+      <% if contenu.fichier_pdf %>
+      <a href="<%= contenu.fichier_pdf.url %>" class="button yellow w-inline-block">
         <div><%= contenu.titre %></div>
       </a>
       <% end %>
       <% end %>
+      <% end %>
+
+
     </div>
   </div>
 </div>
