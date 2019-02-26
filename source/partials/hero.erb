@@ -2,7 +2,7 @@
 <div id="hero" data-w-id="f117c11b-e838-a0eb-e4b0-88be7b4f2758" class="section hero">
   <div class="div-baseline"><img src="/images/logo.png" data-w-id="458db7a9-b972-4d51-f373-86d0763ab1bc" style="opacity:0;-webkit-transform:translate3d(0, 0, 0) scale3d(0.8, 0.8, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(0.8, 0.8, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(0.8, 0.8, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(0.8, 0.8, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" alt="" class="hero-logo">
     <div data-w-id="d55a193c-60db-eda4-2514-bf99862d2c62" style="opacity:0" class="text-date"><%= dato.accueil.slogan %></div>
-    <% if dato.accueil.titre_bouton == "" %>
+    <% if dato.accueil.section_bouton %>
     <a data-w-id="27934c59-3448-b2ae-8fc3-e04801fd3c3e" style="opacity:0" href="#<%= dato.accueil.section_bouton.slug %>" target="_blank" class="button w-inline-block">
       <div><%= dato.accueil.titre_bouton %></div>
     </a>
