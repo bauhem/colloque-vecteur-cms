@@ -1,5 +1,6 @@
 <% dato.sections.each do |section1| %>
 <% if section1.slug == "appel" || section1.slug == "call" %>
+<% if section1.actif %>
 <div id="<%= section1.slug %>" class="section white">
   <div class="div-about-content reverse">
     <div data-w-id="d24c09f2-a185-16e4-d631-9dfaa4c00946" style="opacity:0" class="div-50 text">
@@ -20,6 +21,6 @@
   </div>
   <div class="div-background"><img src="/images/grey.png" srcset="/images/grey-p-500.png 500w, /images/grey-p-800.png 800w, /images/grey-p-1080.png 1080w, /images/grey-p-1600.png 1600w, /images/grey-p-2000.png 2000w, /images/grey-p-2600.png 2600w, /images/grey.png 3812w" sizes="100vw" alt="" class="background-image grey"></div>
 </div>
-
+<% end %>
 <% end %>
 <% end %>
