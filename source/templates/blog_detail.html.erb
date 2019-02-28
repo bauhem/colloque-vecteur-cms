@@ -21,27 +21,30 @@
     <h1 class="nouvelle-heading"><%= publication.titre %></h1>
     <div class="nouvelle-date"><%= publication.date %></div>
     <div>
-
+      <div class="w-richtext">
       <% publication.contenu.each do |contenu| %>
-      <% if contenu.item_type.api_key != "bouton" %>
+      <% if contenu.item_type.api_key  == "intro" %>
+      <%= contenu.description %>
+      <% elsif contenu.item_type.api_key == "image" %>
+      <% if contenu.image %>
+      <h2><%= contenu.titre %></h2>
+      <figure class="w-richtext-align-normal w-richtext-figure-type-image">
+        <div><img src="<%= contenu.image.file.auto('format').fit('crop').crop('edges').lossless('true').width(280).height(300).q(56).to_url %>" alt=""></div>
+      </figure>
       <%= contenu.description %>
       <% end %>
-      <% end %>
-      <% publication.contenu.each do |contenu| %>
-      <% if contenu.item_type.api_key == "bouton" %>
-      <% if contenu.lien_externe != "" %>
-      <a href="<%= contenu.lien_externe %>" target="_blank" class="button yellow w-inline-block">
-        <div><%= contenu.titre %></div>
-      </a>
-      <% end %>
+
+      <% elsif contenu.item_type.api_key == "bouton" %>
       <% if contenu.fichier_pdf %>
       <a href="<%= contenu.fichier_pdf.url %>" class="button yellow w-inline-block">
         <div><%= contenu.titre %></div>
       </a>
       <% end %>
+
       <% end %>
       <% end %>
 
+      </div>
 
     </div>
   </div>
