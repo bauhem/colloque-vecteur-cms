@@ -25,6 +25,7 @@
       <% publication.contenu.each do |contenu| %>
       <% if contenu.item_type.api_key  == "intro" %>
       <%= contenu.description %>
+<br />
       <% elsif contenu.item_type.api_key == "image" %>
       <% if contenu.image %>
       <h2><%= contenu.titre %></h2>
@@ -32,7 +33,20 @@
         <div><img src="<%= contenu.image.file.auto('format').fit('crop').crop('edges').lossless('true').width(280).height(300).q(56).to_url %>" alt=""></div>
       </figure>
       <%= contenu.description %>
-      <% end %>
+      <% end %><br />
+
+      <% elsif contenu.item_type.api_key == "speaker" %>
+      <% contenu.conferencier.each do |speaker| %>
+      <h2><%= speaker.titre %></h2>
+      <figure class="w-richtext-align-normal w-richtext-figure-type-image">
+        <div><img src="<%= speaker.image.file.auto('format').fit('crop').crop('edges').lossless('true').width(280).height(300).q(56).to_url %>" alt=""></div>
+      </figure>
+      <%= speaker.fonction %><br/>
+      <a href="/<%= locale %>/<%= speaker.slug %>" class="button yellow w-inline-block">
+        <div>Lire la biographie</div>
+      </a>
+      <br/> <br/>
+            <% end %>
 
       <% elsif contenu.item_type.api_key == "bouton" %>
       <% if contenu.fichier_pdf %>

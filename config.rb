@@ -114,6 +114,28 @@ end
        end
        end
 
+       dato.tap do |dato|
+         dato.available_locales.each do |locale|
+           I18n.with_locale(locale) do
+           # iterate over the "Blog post" records...
+
+           dato.conferenciers.each do |item|
+           if item.actif
+
+
+           # ...and create a page for each service starting from a template!
+               proxy(
+                 "/#{locale}/#{item.slug}/index.html",
+                 "/templates/simple.html",
+                 locals: { item: item },
+                 locale: locale
+               )
+             end
+            end
+            end
+            end
+            end
+
 
 dato.tap do |dato|
   dato.available_locales.each do |locale|
