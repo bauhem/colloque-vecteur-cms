@@ -62,6 +62,8 @@ page '/*.txt', layout: false
 page "/templates/*", :layout => "layout"
 page '/sitemap.xml', :layout => false
 
+proxy "_redirects", "netlify-redirects", ignore: true
+proxy "_headers", "netlify-headers", ignore: true
 
 dato.tap do |dato|
   dato.available_locales.each do |locale|
