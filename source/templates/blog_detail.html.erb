@@ -42,10 +42,14 @@
         <div><img src="<%= speaker.image.file.auto('format').fit('crop').crop('edges').lossless('true').width(280).height(300).q(56).to_url %>" alt=""></div>
       </figure>
       <%= speaker.fonction %><br/>
+      <% if speaker.description != "" %>
       <a href="/<%= locale %>/<%= speaker.slug %>" class="button yellow w-inline-block">
         <div>Lire la biographie</div>
       </a>
-      <br/> <br/>
+        <br/>
+      <% end %>
+<br/>
+
             <% end %>
 
       <% elsif contenu.item_type.api_key == "bouton" %>
