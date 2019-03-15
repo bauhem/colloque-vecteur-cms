@@ -15,11 +15,15 @@
 
     </div>
     <div>
-      <div><div><%= section1.description_3 %></div></div>
-
       <div>
-        <div class="prog-div"><img src="/images/54515345_842426619425933_8743512683950637056_n.jpg" srcset="/images/54515345_842426619425933_8743512683950637056_n.jpg 500w, /images/54515345_842426619425933_8743512683950637056_n.jpg 800w, /images/54515345_842426619425933_8743512683950637056_n.jpg 1080w, /images/54515345_842426619425933_8743512683950637056_n.jpg 1600w, /images/54515345_842426619425933_8743512683950637056_n.jpg 2000w, /images/54515345_842426619425933_8743512683950637056_n.jpg 2600w, /images/54515345_842426619425933_8743512683950637056_n.jpg 2928w" sizes="(max-width: 479px) 100vw, (max-width: 3253px) 90vw, 2928px" alt=""></div>
-      </div>
+        <div><%= section1.description_3 %></div>
+
+        <div class="prog-div">
+          <img src="<%= dato.accueil.programmation.file.auto('format').fit('fill').lossless('true').width(1900).q(60).to_url %>" sizes="(max-width: 479px) 100vw, (max-width: 3253px) 90vw, 2928px" alt="">
+        </div>
+
+    </div>
+
 
       <% if section1.lien_externe %>
       <a href="<%= section1.lien %>" target="_blank" class="button margin w-inline-block">
