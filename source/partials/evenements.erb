@@ -1,0 +1,164 @@
+<div>
+          <div data-duration-in="300" data-duration-out="100" class="tabs w-tabs">
+            <div class="tab-menu w-tab-menu">
+              <% dato.journees.each_with_index do |jour, index| %>
+              <a id="programmation" data-w-tab="Tab <%= index %>" class="tab-link w-inline-block w-tab-link <% if index == 0 %> w--current <% end %>" <% if index != 0 %> href="#programmation" <% end %>>
+                <div><%= jour.titre %></div>
+              </a>
+              <% end %>
+            </div>
+            <div class="tabs-content w-tab-content">
+              <% dato.journees.each_with_index do |jour, index| %>
+              <div data-w-tab="Tab <%= index %>" class="tab w-tab-pane <% if index == 0 %> w--tab-active<% end %>">
+                <div class="div-33">
+                  <div class="div-third-full">
+                    <div class="titre-jour"><%= jour.titre %></div>
+                  </div>
+                  <div class="div-third-full">
+                        <% dato.evenements.sort_by(&:position).select{ |h| h.journee == jour }.each_with_index do |event, index| %>
+                        <% if event.salle %>
+                        <% if event.salle.conference %>
+
+                            <div class="div-third">
+                              <div class="salle-titre"><%= event.salle.titre %></div>
+                              <div class="main-conf">
+                                <div class="titre-event" data-ix="open-description">
+                                  <% if event.description != "" %>
+                                  <div class="plus-sign div-block" data-ix="open-description-plus">
+                                    <div>+</div>
+                                  </div>
+                                  <% end %>
+
+                                  <%= event.titre %>
+                                  <% if event.description != "" %>
+                                  <% content_tag :p, :class => "paragraph-description paragraph-2" do %>
+                                    <%= strip_tags(event.description) %>
+                                  <% end %>
+                                  <% end %>
+                                </div>
+                                  <% event.conference.each do |conference| %>
+                                  <div class="div-third-full">
+                                    <div class="timeline">
+                                      <div class="titre-heure"><%= conference.heure %></div>
+                                    </div>
+                                    <div class="content-event">
+                                      <div class="avatar">
+                                        <% if conference.conferencier.image %>
+                                        <img src="<%= conference.conferencier.image.file.auto('format').fit('crop').crop('edges').lossless('true').width(40).height(40).q(56).to_url %>" alt="" class="avatar-photo">
+                                        <% end %>
+                                        <div class="titre-conf"><%= conference.conferencier.titre %><br><span class="fonction-conf"><%= conference.conferencier.fonction %></span></div>
+                                      </div>
+                                      <div class="texte-event"><%= conference.description %></div>
+                                    </div>
+                                  </div>
+                                  <% end %>
+                                </div>
+                            </div>
+
+                        <% else %>
+                        <div class="div-third-full <% if event.titre.include?("Pause") %> pause <% end %> <% if event.titre.include?("Mot") %> pause <% end %><% if event.titre.include?("break") %> pause <% end %>">
+
+                          <div class="timeline">
+                            <div class="titre-heure"><%= event.heure %></div>
+                          </div>
+                          <div class="content-event">
+                            <div class="titre-event" data-ix="open-description">
+                              <% if event.description != "" %>
+                              <div class="plus-sign div-block" data-ix="open-description-plus">
+                                <div>+</div>
+                              </div>
+                              <% end %>
+
+                                <%= event.titre %>
+
+                              <% if event.description != "" %>
+                              <% content_tag(:p, event.description, class: ["paragraph-description", "paragraph-2"]) %>
+
+                              <% end %>
+                            </div>
+                          <div class="avatar">
+                            <% event.conference.each do |conference| %>
+                            <% if conference.conferencier %>
+                              <img src="<%= conference.conferencier.image.file.auto('format').fit('crop').crop('edges').lossless('true').width(40).height(40).q(56).to_url %>" alt="" class="avatar-photo">
+                            <div class="titre-conf"><%= conference.conferencier.titre %><br><span class="fonction-conf"><%= conference.conferencier.fonction %></span></div>
+                            <% end %>
+                            <% end %>
+                          </div>
+
+                          </div>
+                        </div>
+                        <% end %>
+                        <% else %>
+                        <% if event.journee == jour %>
+                        <% if event.conference.count != 0 %>
+                        <% event.conference.each do |conference| %>
+                        <div class="div-third-full <% if event.titre.include?("Pause") %> pause <% end %><% if event.titre.include?("Dîner") %> pause <% end %> <% if event.titre.include?("break") %> pause <% end %>">
+
+                          <div class="timeline">
+                            <div class="titre-heure"><%= conference.heure %></div>
+                          </div>
+                          <div class="content-event">
+                            <div class="titre-event" data-ix="open-description">
+                              <% if event.description != "" %>
+                              <div class="plus-sign div-block" data-ix="open-description-plus">
+                                <div>+</div>
+                              </div>
+                              <% end %>
+
+                                <%= event.titre %>
+
+                              <% if event.description != "" %>
+                              <% content_tag(:p, event.description, class: ["paragraph-description", "paragraph-2"]) %>
+
+                              <% end %>
+                            </div>
+                            <div class="avatar">
+                              <% if conference.conferencier.image %>
+                              <img src="<%= conference.conferencier.image.file.auto('format').fit('crop').crop('faces').lossless('true').width(40).height(40).q(56).to_url %>" alt="" class="avatar-photo">
+                              <% end %>
+                              <div class="titre-conf"><%= conference.conferencier.titre %><br><span class="fonction-conf"><%= conference.conferencier.fonction %></span></div>
+                            </div>
+                            <div class="texte-event"><%= conference.description %></div>
+                          </div>
+                        </div>
+                        <% end %>
+                        <% else %>
+                        <div class="div-third-full <% if event.titre.include?("Pause") %> pause <% end %><% if event.titre.include?("Dîner") %> pause <% end %> <% if event.titre.include?("break") %> pause <% end %>">
+
+                          <div class="timeline">
+                            <div class="titre-heure"><%= event.heure %></div>
+                          </div>
+                          <div class="content-event">
+                            <div class="titre-event" data-ix="open-description">
+                              <% if event.description != "" %>
+                              <div class="plus-sign div-block" data-ix="open-description-plus">
+                                <div>+</div>
+                              </div>
+                              <% end %>
+
+                                <%= event.titre %>
+
+                              <% if event.description != "" %>
+                              <% content_tag(:p, event.description, class: ["paragraph-description", "paragraph-2"]) %>
+
+                              <% end %>
+                            </div>
+
+                          </div>
+                        </div>
+                        <% end %>
+                        <% end %>
+
+                        <% end %>
+                        <% end %>
+
+                  </div>
+
+                </div>
+              </div>
+              <% end %>
+
+            </div>
+          </div>
+
+        </div>

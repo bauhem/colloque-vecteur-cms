@@ -30,7 +30,7 @@ set :js_dir, 'javascripts'
 set :index_file, "index.html"
 
 
-activate :dato, live_reload: true, token: '045f8415a95f4ed3d3be0898d8509f'
+activate :dato, preview: true, live_reload: true, token: '045f8415a95f4ed3d3be0898d8509f'
 activate :directory_indexes
 activate :search_engine_sitemap, exclude_attr: 'hidden'
 activate :inliner
