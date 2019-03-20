@@ -1,12 +1,22 @@
 <div>
           <div data-duration-in="300" data-duration-out="100" class="tabs w-tabs">
-            <div class="tab-menu w-tab-menu">
+            <% if lang.to_s == 'fr' %>
+            <div id="programmation" class="tab-menu w-tab-menu">
               <% dato.journees.each_with_index do |jour, index| %>
-              <a id="programmation" data-w-tab="Tab <%= index %>" class="tab-link w-inline-block w-tab-link <% if index == 0 %> w--current <% end %>" <% if index != 0 %> href="#programmation" <% end %>>
+              <a data-w-tab="Tab <%= index %>" class="tab-link w-inline-block w-tab-link <% if index == 0 %> w--current <% end %>" <% if index != 0 %> href="#programmation" <% end %>>
                 <div><%= jour.titre %></div>
               </a>
               <% end %>
             </div>
+            <% elsif lang.to_s == 'en' %>
+            <div id="program" class="tab-menu w-tab-menu">
+              <% dato.journees.each_with_index do |jour, index| %>
+              <a data-w-tab="Tab <%= index %>" class="tab-link w-inline-block w-tab-link <% if index == 0 %> w--current <% end %>" <% if index != 0 %> href="#program" <% end %>>
+                <div><%= jour.titre %></div>
+              </a>
+              <% end %>
+            </div>
+            <% end %>
             <div class="tabs-content w-tab-content">
               <% dato.journees.each_with_index do |jour, index| %>
               <div data-w-tab="Tab <%= index %>" class="tab w-tab-pane <% if index == 0 %> w--tab-active<% end %>">

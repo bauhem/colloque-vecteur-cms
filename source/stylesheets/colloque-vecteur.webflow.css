@@ -1715,8 +1715,8 @@ a {
     line-height: 21px;
   }
   .titre-event {
-    font-size: 22px;
-    line-height: 29px;
+    font-size: 18px;
+    line-height: 23px;
   }
   .div-third {
     width: 100%;
@@ -1748,7 +1748,6 @@ a {
   }
   .div-block {
     width: 24px;
-    margin-top: 12px;
     font-size: 24px;
     line-height: 24px;
   }
