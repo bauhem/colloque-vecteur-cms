@@ -123,6 +123,7 @@
                         <% if event.journee == jour %>
                         <% if event.conference.count != 0 %>
                         <% event.conference.each do |conference| %>
+
                         <div class="div-third-full <% if event.titre.include?("Pause") %> pause <% end %><% if event.titre.include?("Dîner") %> pause <% end %> <% if event.titre.include?("break") %> pause <% end %>">
 
                           <div class="timeline">
@@ -149,17 +150,21 @@
                             <% if event.salle %>
                             <p><%= event.salle.titre %></p>
                             <% end %>
+                            <% if conference.conferencier %>
                             <% if conference.conferencier.image %>
                             <div class="avatar">
                               <img src="<%= conference.conferencier.image.file.auto('format').fit('crop').crop('edges').lossless('true').width(40).height(40).q(56).to_url %>" alt="" class="avatar-photo">
                               <div class="titre-conf"><%= conference.conferencier.titre %><br><span class="fonction-conf"><%= conference.conferencier.fonction %></span></div>
                             </div>
                             <% end %>
+                            <% end %>
+
                             <% if conference.description != "" %>
                             <div class="texte-event"><%= conference.description %></div>
                             <% end %>
                           </div>
                         </div>
+
                         <% end %>
                         <% else %>
                         <div class="div-third-full <% if event.titre.include?("Pause") %> pause <% end %><% if event.titre.include?("Dîner") %> pause <% end %> <% if event.titre.include?("break") %> pause <% end %>">
