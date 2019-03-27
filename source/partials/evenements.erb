@@ -122,13 +122,15 @@
                         <% else %>
                         <% if event.journee == jour %>
                         <% if event.conference.count >= 3 %>
-                        <div class="div-third">
+                        <div class="div-third-full">
+                          <div class="content-event">
                           <div class="titre-event">
                             <% content_tag :p, :class => "titre-event" do %>
                               <%= strip_tags(event.titre) %>
                             <% end %>
                           </div>
-                          <div class="main-conf">
+                          </div>
+                          <div class="content-event">
 
                               <% event.conference.each do |conference| %>
                               <div class="div-third-full"  data-ix="open-description">
