@@ -94,7 +94,7 @@
                             <% end %>
                             <%= conference.titre %>
                             <% if conference.description != "" %>
-                            <div class="texte-event"><%= strip_tags(conference.description) %>1</div>
+                            <div class="texte-event"><%= strip_tags(conference.description) %></div>
                             <% end %>
 
                           </div>
@@ -121,63 +121,86 @@
                         <% end %>
                         <% else %>
                         <% if event.journee == jour %>
-                        <% if event.conference.count != 0 %>
-                        <% event.conference.each do |conference| %>
-
-                        <div class="div-third-full <% if event.titre.include?("Pause") %> pause <% end %><% if event.titre.include?("Dîner") %> pause <% end %> <% if event.titre.include?("break") %> pause <% end %>">
-
-                          <div class="timeline">
-                            <div class="titre-heure"><%= conference.heure %></div>
+                        <% if event.conference.count >= 3 %>
+                        <div class="div-third">
+                          <div class="titre-event">
+                            <% content_tag :p, :class => "titre-event" do %>
+                              <%= strip_tags(event.titre) %>
+                            <% end %>
                           </div>
-                          <div class="content-event">
-                            <div>
-                              <% content_tag :p, :class => "titre-event", 'data-ix' => "open-description"  do %>
-                                <%= strip_tags(event.titre) %>
-                              <% end %>
+                          <div class="main-conf">
 
-                              <% if conference.description != "" %>
-                              <div class="plus-sign div-block" data-ix="open-description-plus">
-                                <div>+</div>
+                              <% event.conference.each do |conference| %>
+                              <div class="div-third-full"  data-ix="open-description">
+                                <div class="timeline">
+                                  <div class="titre-heure"><%= conference.heure %></div>
+                                </div>
+                                <div class="content-event">
+                                  <% if conference.conferencier %>
+                                  <div class="avatar">
+                                    <% if conference.conferencier.image %>
+                                    <img src="<%= conference.conferencier.image.file.auto('format').fit('crop').crop('edges').lossless('true').width(40).height(40).q(56).to_url %>" alt="" class="avatar-photo">
+                                    <% end %>
+                                    <div class="titre-conf"><%= conference.conferencier.titre %><br><span class="fonction-conf"><%= conference.conferencier.fonction %></span></div>
+                                  </div>
+                                  <% end %>
+
+                                  <% if conference.description != "" %>
+                                  <div class="plus-sign div-block" data-ix="open-description-plus">
+                                    <div>+</div>
+                                  </div>
+                                  <% end %>
+                                  <% if conference.titre != "" %>
+                                  <% content_tag :p, :class => "sous-titre-event" do %>
+                                    <%= strip_tags(conference.titre) %>
+                                  <% end %>
+                                  <% end %>
+                                    <% if conference.description != "" %>
+                                    <% content_tag :p, :class => "paragraph-description" do %>
+                                      <%= strip_tags(conference.description) %>
+                                    <% end %>
+                                    <% end %>
+                                </div>
                               </div>
                               <% end %>
-                              <%= conference.titre %>
-                              <% if conference.description != "" %>
-                              <% content_tag :p, :class => "paragraph-description paragraph-2" do %>
-                                <%= strip_tags(conference.description) %>
-                              <% end %>
-                              <% end %>
                             </div>
-                            <% if event.salle %>
-                            <p><%= event.salle.titre %></p>
-                            <% end %>
-                            <% if conference.conferencier %>
-                            <% if conference.conferencier.image %>
-                            <div class="avatar">
-                              <img src="<%= conference.conferencier.image.file.auto('format').fit('crop').crop('edges').lossless('true').width(40).height(40).q(56).to_url %>" alt="" class="avatar-photo">
-                              <div class="titre-conf"><%= conference.conferencier.titre %><br><span class="fonction-conf"><%= conference.conferencier.fonction %></span></div>
-                            </div>
-                            <% end %>
-                            <% end %>
-
-                            <% if conference.description != "" %>
-                            <div class="texte-event"><%= conference.description %></div>
-                            <% end %>
-                          </div>
                         </div>
-
-                        <% end %>
                         <% else %>
+
                         <div class="div-third-full <% if event.titre.include?("Pause") %> pause <% end %><% if event.titre.include?("Dîner") %> pause <% end %> <% if event.titre.include?("break") %> pause <% end %>">
                           <div class="timeline">
                             <div class="titre-heure"><%= event.heure %></div>
                           </div>
                           <div class="content-event">
                             <div>
+                              <% event.conference.each do |conference| %>
+                              <% if conference.conferencier %>
                               <% content_tag :p, :class => "titre-event" do %>
                                 <%= strip_tags(event.titre) %>
                               <% end %>
-                              <% event.conference.each do |conference| %>
+                              <div class="avatar">
+                                <% if conference.conferencier.image %>
+                                <img src="<%= conference.conferencier.image.file.auto('format').fit('crop').crop('edges').lossless('true').width(40).height(40).q(56).to_url %>" alt="" class="avatar-photo">
+                                <% end %>
+                                <div class="titre-conf"><%= conference.conferencier.titre %><br><span class="fonction-conf"><%= conference.conferencier.fonction %></span></div>
+                              </div>
+                              <% else %>
+                              <% end %>
+                              <% end %>
 
+                              <% if event.conference %>
+                              <% else %>
+                              <% content_tag :p, :class => "titre-event" do %>
+                                <%= strip_tags(event.titre) %>
+                              <% end %>
+                              <% end %>
+
+                              <% event.conference.each do |conference| %>
+                              <% if event.conference.count == 1 %>
+                              <% content_tag :p, :class => "titre-event" do %>
+                                <%= strip_tags(event.titre) %>
+                              <% end %>
+                              <% end %>
                               <% if conference.description != "" %>
                               <div class="plus-sign div-block" data-ix="open-description-plus">
                                 <div>+</div>
@@ -192,9 +215,16 @@
                               <% end %>
 
                             </div>
+                            <% if event.conference.count == 0 %>
                             <% if event.salle %>
-                            <p><%= event.salle.titre %></p>
+
+                            <% content_tag :p, :class => "titre-event" do %><%= strip_tags(event.titre) %><% end %>
+                            <% else %>
+
+                            <% content_tag :p, :class => "titre-event" do %><%= strip_tags(event.titre) %><% end %>
                             <% end %>
+                            <% end %>
+
                           </div>
                         </div>
                         <% end %>
