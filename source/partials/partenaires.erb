@@ -23,7 +23,7 @@
         <% dato.partenaires.sort_by(&:position).each do |partenaire| %>
         <% if partenaire.categorie_de_partenariat == categorie %>
         <a href="<%= partenaire.link %>" target="_blank" class="partenaire second w-inline-block">
-          <div class="div-logo"><img src="<%= partenaire.image.file.auto('format').fit('fill').lossless('true').height(150).width(300).q(56).to_url %>" srcset="<%= partenaire.image.file.auto('format').fit('fill').lossless('true').height(150).q(56).to_url %> 1080w, <%= partenaire.image.file.auto('format').fit('fill').lossless('true').height(150).q(56).to_url %> 1101w" alt=""></div>
+          <div class="div-logo second"><img src="<%= partenaire.image.file.auto('format').fit('fill').lossless('true').height(150).width(300).q(56).to_url %>" alt=""></div>
         </a>
         <% end %>
         <% end %>
