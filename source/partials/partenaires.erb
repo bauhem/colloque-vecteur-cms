@@ -1,0 +1,28 @@
+<div id="partenaires" class="section white">
+  <div id="w-node-dadac26dad4c-cbbd0ea9" class="div-background"><img src="images/grey.png" srcset="images/grey-p-500.png 500w, images/grey-p-800.png 800w, images/grey-p-1080.png 1080w, images/grey-p-1600.png 1600w, images/grey-p-2000.png 2000w, images/grey-p-2600.png 2600w, images/grey.png 3812w" sizes="100vw" alt="" class="background-image sujets"></div>
+    <div class="div-sujets-content">
+      <div data-w-id="3aaf7c76-8d7a-d2d6-e3b9-06656591396b" style="opacity:0">
+        <div class="title yellow">MERCI À NOS PARTENAIRES</div>
+      </div>
+      <div>Le colloque Vecteur est rendu possible grâce à la participation financière de nos partenaires  :  </div>
+      <% dato.categorie_de_partenariats.sort_by(&:position).each do |categorie| %>
+      <% if categorie.actif %>
+      <% if categorie.position != 1 %>
+      <div data-w-id="3aaf7c76-8d7a-d2d6-e3b9-06656591396b" style="opacity:0">
+        <div class="title yellow <% if categorie.position == 1 %><% elsif categorie.position == 2 %>second<% elsif categorie.position > 3 %>third<% end %>"><%= categorie.titre %></div>
+      </div>
+      <% end %>
+      <div data-w-id="78456833-fe13-0b7b-1c07-d4426144ab61" style="opacity:0" class="div-nouvelles-container">
+        <% dato.partenaires.sort_by(&:position).each do |partenaire| %>
+        <% if partenaire.categorie_de_partenariat == categorie %>
+        <a href="<%= partenaire.link %>" target="_blank" class="partenaire second w-inline-block">
+          <div class="div-logo"><img src="<%= partenaire.image.file.auto('format').fit('fill').lossless('true').height(300).width(300).q(56).to_url %>" srcset="<%= partenaire.image.file.auto('format').fit('fill').lossless('true').height(300).q(56).to_url %> 1080w, <%= partenaire.image.file.auto('format').fit('fill').lossless('true').height(300).q(56).to_url %> 1101w" alt=""></div>
+        </a>
+        <% end %>
+        <% end %>
+
+      </div>
+      <% end %>
+      <% end %>
+    </div>
+</div>
