@@ -27,7 +27,7 @@
         <% dato.partenaires[0...2].sort_by(&:position).each do |partenaire| %>
         <% if partenaire.categorie_de_partenariat == categorie %>
         <a href="<%= partenaire.link %>" target="_blank" class="partenaire w-inline-block">
-          <div class="div-logo second"><img src="<%= partenaire.image.file.auto('format').fit('fill').lossless('true').height(180).width(475).q(56).to_url %>" alt=""></div>
+          <div class="div-logo second"><img src="<%= partenaire.image.file.auto('format').fit('fill').lossless('true').height(180).width(500).q(56).to_url %>" alt=""></div>
         </a>
         <% end %>
         <% end %>
