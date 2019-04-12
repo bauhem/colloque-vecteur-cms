@@ -1247,10 +1247,13 @@ a {
   display: -ms-flexbox;
   display: flex;
   width: 31%;
+  min-height: 200px;
   margin-right: 1%;
   margin-bottom: 2%;
   margin-left: 1%;
-  padding: 20px 30px;
+  padding-top: 20px;
+  padding-right: 30px;
+  padding-left: 30px;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
   -webkit-flex-direction: row;
@@ -1270,6 +1273,13 @@ a {
   -webkit-align-content: center;
   -ms-flex-line-pack: center;
   align-content: center;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 48%;
+  -ms-flex: 0 48%;
+  flex: 0 48%;
   background-color: #fff;
   -webkit-transition: -webkit-transform 300ms ease;
   transition: -webkit-transform 300ms ease;
@@ -1288,11 +1298,18 @@ a {
 
 .partenaire.second {
   width: 23%;
+  min-height: auto;
+  -webkit-flex-basis: 31%;
+  -ms-flex-preferred-size: 31%;
+  flex-basis: 31%;
 }
 
 .partenaire.third {
   width: 18%;
   min-height: 200px;
+  -webkit-flex-basis: 23%;
+  -ms-flex-preferred-size: 23%;
+  flex-basis: 23%;
 }
 
 .partenaire-titre {
