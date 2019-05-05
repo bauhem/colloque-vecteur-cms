@@ -97,9 +97,12 @@
                             </div>
                             <% end %>
                             <%= conference.titre %>
-                            <% if conference.description != "" %>
-                            <div class="texte-event"><%= strip_tags(conference.description) %></div>
-                            <% end %>
+                            <% if conference.pdf %>
+                            <a href="<%= conference.pdf.file.to_url %>" class="titre-event titre-conf">Télécharger le pdf</a>
+                              <% elsif conference.description != "" %>
+                              <div class="texte-event"><%= strip_tags(conference.description) %></div>
+                              <% end %>
+
 
                           </div>
                         </div>
@@ -151,7 +154,8 @@
                                   </div>
                                   <% end %>
 
-                                  <% if conference.description != "" %>
+                                  <% if conference.pdf %>
+                                  <% elsif conference.description != "" %>
                                   <div class="plus-sign div-block" data-ix="open-description-plus">
                                     <div>+</div>
                                   </div>
@@ -161,7 +165,9 @@
                                     <%= strip_tags(conference.titre) %>
                                   <% end %>
                                   <% end %>
-                                    <% if conference.description != "" %>
+                                  <% if conference.pdf %>
+                                  <a href="<%= conference.pdf.file.to_url %>" class="titre-event titre-conf">Télécharger le pdf</a>
+                                    <% elsif conference.description != "" %>
                                     <% content_tag :p, :class => "paragraph-description" do %>
                                       <%= strip_tags(conference.description) %>
                                     <% end %>
@@ -207,17 +213,20 @@
                                 <%= strip_tags(event.titre) %>
                               <% end %>
                               <% end %>
-                              <% if conference.description != "" %>
+                              <% if conference.pdf %>
+                              <% elsif conference.description != "" %>
                               <div class="plus-sign div-block" data-ix="open-description-plus">
                                 <div>+</div>
                               </div>
                               <% end %>
                               <%= conference.titre %>
-                              <% if conference.description != "" %>
-                              <% content_tag :p, :class => "paragraph-description paragraph-2" do %>
-                                <%= strip_tags(conference.description) %>
-                              <% end %>
-                              <% end %>
+                              <% if conference.pdf %>
+                              <a href="<%= conference.pdf.file.to_url %>" class="titre-event titre-conf">Télécharger le pdf</a>
+                                <% elsif conference.description != "" %>
+                                <% content_tag :p, :class => "paragraph-description" do %>
+                                  <%= strip_tags(conference.description) %>
+                                <% end %>
+                                <% end %>
                               <% end %>
 
                             </div>
